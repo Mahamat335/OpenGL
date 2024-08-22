@@ -200,6 +200,14 @@ int main()
 		shaderProgram.setVec3("viewPos", camera.Position);
 		glUniform3f(lightColorLoc, 1.0f, 1.0f, 1.0f);
 		glUniform3f(lightPosLoc, 2.0f, 2.0f, 0.0f);
+
+		shaderProgram.setVec3("pointLights[0].position", glm::vec3(2.0f, 2.0f, 0.0f));
+		shaderProgram.setVec3("pointLights[0].ambient", glm::vec3(0.05f, 0.05f, 0.05f));
+		shaderProgram.setVec3("pointLights[0].diffuse", glm::vec3(0.8f, 0.8f, 0.8f));
+		shaderProgram.setVec3("pointLights[0].specular", glm::vec3(1.0f, 1.0f, 1.0f));
+		shaderProgram.setFloat("pointLights[0].constant", 1.0f);
+		shaderProgram.setFloat("pointLights[0].linear", 0.09f);
+		shaderProgram.setFloat("pointLights[0].quadratic", 0.032f);
 		// retrieve the matrix uniform locations
 
 		unsigned int viewLoc = glGetUniformLocation(shaderProgram.ID, "view");
