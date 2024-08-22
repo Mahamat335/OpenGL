@@ -30,7 +30,8 @@ vec3 CalcPointLight(PointLight light, vec3 normal, vec3 fragPos, vec3 viewDir);
 
 void main()
 {
-    float ambientStrength = 0.1;
+    float gamma = 2.2;
+    float ambientStrength = 0.5;
     vec3 ambient = ambientStrength * lightColor;
 
     vec3 norm = normalize(Normal);
@@ -49,7 +50,9 @@ void main()
     for(int i = 0; i < NR_POINT_LIGHTS; i++)
         result += CalcPointLight(pointLights[i], norm, FragPos, viewDir);
 
+    FragColor.rgb = pow(FragColor.rgb, vec3(1 / gamma));
     FragColor = vec4(result, 1.0f) * mix(texture(texture1, TexCoord), texture(texture2, TexCoord), 0.2);
+    FragColor.rgb = pow(FragColor.rgb, vec3(gamma));
     //FragColor = vec4((ambient + diffuse + specular) * vec3(0.5f, 0.5f, 0.0f), 1.0f);
 }
 
