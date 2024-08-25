@@ -1,8 +1,8 @@
 #include <Game.h>
 #include <CubeCollider.h>
 
-Entity *floor1[100][100];
-Entity root, object, child, grandChild, o2;
+Entity *floor1[10][10];
+Entity root, object, child, grandChild, o2, floor2;
 
 Game::GameData Game::data = {};
 
@@ -18,15 +18,18 @@ bool Game::Start()
     child = Entity(Transform(glm::vec3(1.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.5f, 0.5f, 0.5f)));
     grandChild = Entity(Transform(glm::vec3(0.0f, 1.0f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.5f, 0.5f, 0.5f)));
     o2 = Entity(Transform(glm::vec3(10.0f, 0.0f, 0.0f)));
+    floor2 = Entity(Transform(glm::vec3(0.0f, -20.0f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(50.0f, 1.0f, 50.0f)));
     root.AddChild(&o2);
 
     root.AddChild(&object);
     object.AddChild(&child);
     child.AddChild(&grandChild);
 
-    for (int i = 0; i < 100; i++)
+    root.AddChild(&floor2);
+
+    for (int i = 0; i < 10; i++)
     {
-        for (int j = 0; j < 100; j++)
+        for (int j = 0; j < 10; j++)
         {
             floor1[i][j] = new Entity(Transform(glm::vec3((float)i, -10.0f, (float)j)));
             root.AddChild(floor1[i][j]);
@@ -49,8 +52,8 @@ bool Game::Update(float deltaTime)
     {
         // std::cout << 1;
     }
-    for (int i = 0; i < 100; i++)
-        for (int j = 0; j < 100; j++)
+    for (int i = 0; i < 10; i++)
+        for (int j = 0; j < 10; j++)
             floor1[i][j]->Rotate(floor1[i][j]->transform.eulerRot + glm::vec3(20 * deltaTime, 15 * deltaTime, (200 - i - j) * deltaTime));
     object.Move(data.playerVel + object.transform.pos);
     object.Rotate(glm::vec3(0.0f, (float)deltaTime * 50, 0.0f) + object.transform.eulerRot);
