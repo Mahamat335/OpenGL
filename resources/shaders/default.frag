@@ -82,7 +82,7 @@ vec3 CalcPointLight(PointLight light, vec3 normal, vec3 fragPos, vec3 viewDir)
     float attenuation = 1.0 / (light.constant + light.linear * distance + 
   			     light.quadratic * (distance * distance));    
     // combine results
-    vec3 lightColorP = glm::vec3(1.0f, 1.0f, 0.0f);
+    vec3 lightColorP = glm::vec3(0.0f, 0.0f, 0.0f);
     vec3 ambient  = light.ambient  * lightColorP;
     vec3 diffuse  = light.diffuse  * diff * lightColorP;
     vec3 specular = light.specular * spec * lightColorP;

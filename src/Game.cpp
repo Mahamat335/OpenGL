@@ -2,7 +2,7 @@
 #include <CubeCollider.h>
 
 Entity *floor1[10][10];
-Entity root, object, child, grandChild, o2, floor2;
+Entity root, object, child, grandChild, o2, floor2, wall;
 
 Game::GameData Game::data = {};
 
@@ -19,6 +19,7 @@ bool Game::Start()
     grandChild = Entity(Transform(glm::vec3(0.0f, 1.0f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.5f, 0.5f, 0.5f)));
     o2 = Entity(Transform(glm::vec3(10.0f, 0.0f, 0.0f)));
     floor2 = Entity(Transform(glm::vec3(0.0f, -20.0f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(50.0f, 1.0f, 50.0f)));
+    wall = Entity(Transform(glm::vec3(25.0f, -20.0f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(1.0f, 30.0f, 30.0f)));
     root.AddChild(&o2);
 
     root.AddChild(&object);
@@ -26,6 +27,7 @@ bool Game::Start()
     child.AddChild(&grandChild);
 
     root.AddChild(&floor2);
+    root.AddChild(&wall);
 
     for (int i = 0; i < 10; i++)
     {
